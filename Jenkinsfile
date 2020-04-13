@@ -10,16 +10,35 @@ def kubectlTest() {
 def helmTest() {
     // lint helm chart
     sh "/usr/local/bin/helm version"
-
 }
 
+def helmLint() {
+  sh "/usr/local/bin/helm lint tutorial"
+}
 
-
-
+def helmInstall() {
+  sh "/usr/local/bin/helm tutorial tutorial"
+}
 
 node {
         stage "Testing"
         kubectlTest();
         helmTest();
         echo "Done testing"
+
+        echo "Pull project"
+
+        git url: 'https://github.com/ogross74/helm-tutorial.git'
+
+        echo "Lint..."
+
+        helmLint();
+
+        echo "Install..."
+
+        helmInstall();
+
+        echo "Installed"
+
+
 }
