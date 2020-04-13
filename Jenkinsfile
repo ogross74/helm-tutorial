@@ -19,7 +19,7 @@ def helmTest() {
 
 node {
         stage "Testing"
-        helmTest();
         kubectlTest();
+        helmTest();
         echo "Done testing"
 }
