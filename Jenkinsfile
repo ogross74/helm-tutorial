@@ -24,15 +24,6 @@ def getServices() {
   sh "kubectl get services"
 }
 
-def helmUninstall() {
-  String ret = sh(script: 'helm list | grep tutorial | wc -l', returnStdout: true)
-  echo "Count is " + ret;
-  if (ret.equals("0")) {
-    echo "not yet installed";
-  }else {
-    sh "/usr/local/bin/helm uninstall tutorial"
-  }
-}
 
 node {
 
@@ -53,10 +44,6 @@ node {
           helmLint();
         }
 
-        stage ('helm uninstall') {
-          //helmUninstall();
-          echo "no uninstall for now"
-        }
 
         stage ('helm install') {
           echo "Install..."
