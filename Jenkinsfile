@@ -24,24 +24,31 @@ def getServices() {
   sh "kubectl get services"
 }
 node {
-        stage "Testing"
-        kubectlTest();
-        helmTest();
-        echo "Done testing"
 
-        echo "Pull project"
+        stage ('helm test') {
+          kubectlTest();
+          helmTest();
+          echo "Done testing"
+        }
 
-        git url: 'https://github.com/ogross74/helm-tutorial.git'
+        stage ('git pull') {
+          echo "Pull project"
+          git url: 'https://github.com/ogross74/helm-tutorial.git'
+        }
 
-        echo "Lint..."
+        stage ('helm lint') {
+          echo "Lint..."
 
-        helmLint();
+          helmLint();
+        }
 
-        echo "Install..."
+        stage ('helm install') {
+          echo "Install..."
 
-        helmInstall();
+          helmInstall();
 
-        echo "Installed"
+          echo "Installed"
 
-        getServices();
+          getServices();
+        }
 }
