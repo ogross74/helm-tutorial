@@ -23,6 +23,15 @@ def helmInstall() {
 def getServices() {
   sh "kubectl get services"
 }
+
+def helmUninstall() {
+  def ret = sh(script: 'helm list | grep tutorial | wc -l', returnStdout: true)
+  echo "Count is " + ret;
+  if ret > 0 {
+    sh "/usr/local/bin/helm uninstall tutorial"
+  }
+}
+
 node {
 
         stage ('helm test') {
@@ -40,6 +49,10 @@ node {
           echo "Lint..."
 
           helmLint();
+        }
+
+        stage ('helm uninstall') {
+          def count = helmCount();
         }
 
         stage ('helm install') {
