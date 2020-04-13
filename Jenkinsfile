@@ -27,7 +27,7 @@ def getServices() {
 def helmUninstall() {
   def ret = sh(script: 'helm list | grep tutorial | wc -l', returnStdout: true)
   echo "Count is " + ret;
-  if ret > 0 {
+  if (ret > 0) {
     sh "/usr/local/bin/helm uninstall tutorial"
   }
 }
