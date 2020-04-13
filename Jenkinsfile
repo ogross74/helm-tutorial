@@ -52,7 +52,7 @@ node {
         }
 
         stage ('helm uninstall') {
-          def count = helmCount();
+          helmUninstall();
         }
 
         stage ('helm install') {
