@@ -17,7 +17,7 @@ def helmLint() {
 }
 
 def helmInstall() {
-  sh "/usr/local/bin/helm tutorial tutorial"
+  sh "/usr/local/bin/helm install tutorial tutorial"
 }
 
 node {
