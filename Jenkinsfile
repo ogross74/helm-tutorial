@@ -17,7 +17,7 @@ def helmLint() {
 }
 
 def helmInstall() {
-  sh "/usr/local/bin/helm install tutorial tutorial"
+  sh "/usr/local/bin/helm upgrade --install tutorial tutorial"
 }
 
 def getServices() {
@@ -54,7 +54,8 @@ node {
         }
 
         stage ('helm uninstall') {
-          helmUninstall();
+          //helmUninstall();
+          echo "no uninstall for now"
         }
 
         stage ('helm install') {
