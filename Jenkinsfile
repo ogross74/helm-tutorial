@@ -20,6 +20,9 @@ def helmInstall() {
   sh "/usr/local/bin/helm install tutorial tutorial"
 }
 
+def getServices() {
+  sh "kubectl get services"
+}
 node {
         stage "Testing"
         kubectlTest();
@@ -40,5 +43,5 @@ node {
 
         echo "Installed"
 
-
+        getServices();
 }
